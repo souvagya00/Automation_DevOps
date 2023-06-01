@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  ECSService:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: MyECSService
+      Cluster: MyECSCluster
+      TaskDefinition: my-task-definition
+      LaunchType: FARGATE
+      DesiredCount: 1
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - <security_group_id>
+          Subnets:
+            - <subnet_id>

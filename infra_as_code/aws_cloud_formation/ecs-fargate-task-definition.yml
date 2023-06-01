@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      Family: my-task-definition
+      RequiresCompatibilities:
+        - FARGATE
+      Cpu: '512'
+      Memory: '1GB'
+      NetworkMode: awsvpc
+      ExecutionRoleArn: <execution_role_arn>
+      ContainerDefinitions:
+        - Name: my-container
+          Image: <container_image>
+          PortMappings:
+            - ContainerPort: 80
+              Protocol: tcp
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: <log_group_name>
+              awslogs-region: <aws_region>
